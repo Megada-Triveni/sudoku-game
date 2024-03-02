@@ -18,7 +18,27 @@ def is_valid(grid,row,col,number):
       if grid[corner_row + x][corner_col + y] ==number:
         return False
   return True
-
+def solve(grid,row,col):
+  if col ==9:
+    if row== 0:
+      return True
+    row+=1
+    col=0
+  if grid[row][col]>0:
+    return solve(grid,row,col+1)
+  for num in range(1,10):
+    if is_valid(grid,row,col,number):
+      grid[row][col]=num
+      if solve(grid,row,col+1):
+        return True
+      grid[row][col]=0
+  return True
+if solve(grid,0,0):
+  for i range(9):
+    for j range(9):
+      print(grid[i][j],end=" ")
+else:
+  print("No solution")
 
 
 
